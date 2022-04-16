@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const User = require("./models/mongodb/userSchema")
+const User = require("./mongodb/userSchema")
 const bcrypt = require("bcrypt")
 
 // 회원가입
