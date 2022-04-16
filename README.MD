@@ -1,7 +1,14 @@
 ## 작업해야할 내용
-- [ ]  
-- [ ] API 설계하기
-    * API 설계서 참고
+
+    - [ ] 연결
+
+
+## 모르는 부분
+
+    - Primary key, Forigner key 설정 방법
+    - sequelize 구조에 대한 이해 부족
+    -  
+
 
 
 
