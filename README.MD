@@ -20,6 +20,11 @@
     - Primary key, Forigner key 설정 방법
     - sequelize 구조에 대한 이해 부족
 
+## 새롭게 알게된 부분
+
+    - [ ] require 부분도 정리할 수 있다. ( 원영님 소스코드 참조)
+    - [ ] 
+
 ## 폴더 구조
 
     ```
