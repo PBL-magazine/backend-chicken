@@ -1,11 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
   const Posts = sequelize.define(
-    "Posts",
+    "post",
     {
       post_id: {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      title: {
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       content: {
@@ -18,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       deleted_at: {
         type: DataTypes.TIME,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
