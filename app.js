@@ -3,16 +3,14 @@ const app = express()
 
 const morgan = require("morgan")
 const cors = require("cors")
-// const api = require("./router/routers")
-const router = require("./router/postRouter")
 
+app.use(express.json())
 app.use(cors())
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: false }))
 
-app.use("/api", router)
-// app.use("/api", router)
-// app.use("/api", router)
+app.use("/api", require("./router/postRouter"))
+
 
 const PORT = 5500
 
