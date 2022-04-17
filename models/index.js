@@ -1,39 +1,45 @@
 const { sequelize } = require("../utils/dbConfig")
-const { Users } = require("../models/Users")
-const { Posts } = require("../models/Posts")
-const { Comments } = require("../models/Comments")
-const { Likes } = require("../models/likes")
+const { Sequelize, DataTypes } = require("sequelize")
+
+sequelize.authenticate().then((err) => {
+  console.log("connection has been established Suc")
+}).catch((err)=>{
+  console.log("문제가 발생했습니다")
+})
+
+const db = {}
+
+db.Sequelize = Sequelize
+db.sequelize = sequelize
+
+db.users = require("./userModel")(sequelize, DataTypes)
+db.likes = require("./likeModel")(sequelize, DataTypes)
+db.comments = require("./commentModel")(sequelize, DataTypes)
+db.posts = require("./postModel")(sequelize, DataTypes)
 
 // posts
-Users.hasMany(Posts, { foreignKey: "user_id", as: "post" })
-Posts.belongsTo(Users, { foreignKey: "user_id", as: "user" })
+db.users.hasMany(db.posts, { foreignKey: "user_id", as: "post" })
+db.posts.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
 
 // likes
-Users.hasMany(Likes, { foreignKey: "user_id", as: "like" })
-Posts.hasMany(Likes, { foreignKey: "post_id", as: "like" })
-Likes.belongsTo(Users, { foreignKey: "user_id", as: "user" })
-Likes.belongsTo(Posts, { foreignKey: "post_id", as: "post" })
+db.users.hasMany(db.likes, { foreignKey: "user_id", as: "like" })
+db.posts.hasMany(db.likes, { foreignKey: "post_id", as: "like" })
+db.likes.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
+db.likes.belongsTo(db.posts, { foreignKey: "post_id", as: "post" })
 
 //commnet
-Users.hasMany(Comments, { foreignKey: "user_id", as: "comment" })
-Posts.hasMany(Comments, { foreignKey: "post_id", as: "comment" })
-Comments.belongsTo(Users, { foreignKey: "user_id", as: "user" })
-Comments.belongsTo(Posts, { foreignKey: "post_id", as: "post" })
+db.users.hasMany(db.comments, { foreignKey: "user_id", as: "comment" })
+db.posts.hasMany(db.comments, { foreignKey: "post_id", as: "comment" })
+db.comments.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
+db.comments.belongsTo(db.posts, { foreignKey: "post_id", as: "post" })
 
 sequelize
   .sync({ force: true })
   .then((result) => {
-    return Comments.create({
-      content: "내용입니다",
-      post_id: 1,
-      user_id: 2,
-    })
-  })
-  .then((comment) => {
-    console.log(comment)
+      console.log(`output : ${result}` )
   })
   .catch((err) => {
     console.log(err)
   })
 
-module.exports = sequelize
+module.exports =  db 
