@@ -1,4 +1,4 @@
-const { sequelize } = require("../utils/dbConfig")
+const { sequelize } = require("../../utils/dbConfig")
 const { Sequelize, DataTypes } = require("sequelize")
 
 sequelize.authenticate().then((err) => {

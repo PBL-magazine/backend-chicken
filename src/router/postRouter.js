@@ -1,7 +1,7 @@
 const postController = require("../controllers/postControllers")
 const router = require("express").Router()
 
-router.post("/posts", postController.creaetPost)
+router.post("/posts", postController.createPost)
 
 router.get("/posts", postController.fetchList)
 
