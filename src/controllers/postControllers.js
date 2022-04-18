@@ -6,15 +6,17 @@ const Users = db.users
 
 // 게시물 전체 조회	/api/posts	GET
 const fetchList = async (req, res) => {
-  const post = await Posts.findOne({
+  const post = await Posts.findAll({
     include: [
       {
+        raw: true,
         model: Users,
         as: "user",
+        attributes: ["user_id", "email", "nickname"],
       },
     ],
   })
-  res.status(200).send({ post: post})
+  res.status(200).send({ post: post })
 }
 
 // 게시물 생성	/api/post	POST
@@ -31,13 +33,19 @@ const createPost = async (req, res) => {
   res.status(200).send(post)
 }
 
-// // 특정 게시물 조회	/api/posts/:post_id	GET
+// 특정 게시물 조회
 // router.get('/posts/:post_id')
 const readPost = async (req, res) => {
   let id = req.params.post_id
 
   const post = await Posts.findOne({
-    include: [{ model: Users, as: "user" }],
+    include: [
+      {
+        model: Users,
+        as: "user",
+        attributes: ["user_id", "email", "nickname"],
+      },
+    ],
     where: { post_id: id },
   })
   res.status(200).send(post)

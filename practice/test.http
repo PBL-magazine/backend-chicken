@@ -1,36 +1,10 @@
-###
+## posts 전체 다 가져오기
 GET http://localhost:5500/api/posts
 Content-Type: application/json
 
-###
+### post 하나만 가져오기
 GET http://localhost:5500/api/posts/1
 Content-Type: application/json
-
-
-###  test 라우터 설정
-GET http://localhost:5500/api/test/users
-Content-Type: application/json
-
-
-### test 라우터 설정
-POST http://localhost:5500/api/test/users
-Content-Type: application/json
-
-{
-    "email" : "setev",
-    "password" : "hello"
-}
-
-
-### login test
-POST http://localhost:5500/api/user/login
-Content-Type: application/json
-
-{
-    "email" : "setev",
-    "password" : "helo"
-}
-
 
 
 ###  signup

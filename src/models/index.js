@@ -9,9 +9,11 @@ sequelize.authenticate().then((err) => {
 
 const db = {}
 
+// init sequelize
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
+// import models
 db.users = require("./userModel")(sequelize, DataTypes)
 db.likes = require("./likeModel")(sequelize, DataTypes)
 db.comments = require("./commentModel")(sequelize, DataTypes)
@@ -34,9 +36,9 @@ db.comments.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
 db.comments.belongsTo(db.posts, { foreignKey: "post_id", as: "post" })
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: false }) // true일때 컬럼이 모두 초기화됨
   .then((result) => {
-      console.log(`connected sequelize` )
+      console.log(`---------------init sequelize--------------` )
   })
   .catch((err) => {
     console.log(err)
