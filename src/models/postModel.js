@@ -20,10 +20,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: true,
       },
-      deleted_at: {
-        type: DataTypes.TIME,
-        allowNull: true,
-      },
     },
     {
       sequelize,
