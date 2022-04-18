@@ -11,10 +11,16 @@ module.exports = (sequelize, DataTypes) => {
       nickname: {
         type: DataTypes.STRING(30),
         allowNull: false,
+        validate: {
+          len: { args : [3, 10], msg : "checking your length"}
+        },
       },
       email: {
         type: DataTypes.STRING(30),
         allowNull: false,
+        validate: {
+          isEmail: { args: true, msg: "checking your email format" },
+        },
       },
       password: {
         type: DataTypes.STRING(200),
@@ -22,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       role: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0,
       },
     },
     {
@@ -34,6 +41,9 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
       timestamps: true,
       paranoid: true,
+      validate: {
+
+      }
     }
   )
   return Users
