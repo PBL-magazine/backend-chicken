@@ -65,6 +65,7 @@
 
     ```
     |- practice <정삭제예정> 
+    |- docs
     |- src
     |  |- models
     |  |- controllers
