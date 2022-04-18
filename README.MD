@@ -2,6 +2,12 @@
 
     - Express, JWT, Sequelize, mysql, joi, docker, postman 
 
+## 현재 작업중 
+
+    - [ ] cookie-seesion 설정 및 사용자 상태 
+    - [ ] cookie-session middle ware를 기존 라우터에 연결
+    - [ ] fetchList 부분 원하는 데이터만 가져오기가 안됨 (attributes, include)
+
 ## 요구조건
 <aside>
 ✅ API 서버 요구 사항
