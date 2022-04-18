@@ -18,7 +18,7 @@ app.use(cors())
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: false }))
 
-app.use("/api", require("./src/router/postRouter"))
+app.use("/api", require("./src/router/routers"))
 
 const PORT = 5500
 
