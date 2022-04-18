@@ -36,7 +36,7 @@ db.comments.belongsTo(db.posts, { foreignKey: "post_id", as: "post" })
 sequelize
   .sync({ force: false })
   .then((result) => {
-      console.log(`output : ${result}` )
+      console.log(`connected sequelize` )
   })
   .catch((err) => {
     console.log(err)
