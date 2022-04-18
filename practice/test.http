@@ -1,3 +1,54 @@
 ###
 GET http://localhost:5500/api/posts
-Content-Type: json
+Content-Type: application/json
+
+###
+GET http://localhost:5500/api/posts/1
+Content-Type: application/json
+
+
+###  test 라우터 설정
+GET http://localhost:5500/api/test/users
+Content-Type: application/json
+
+
+### test 라우터 설정
+POST http://localhost:5500/api/test/users
+Content-Type: application/json
+
+{
+    "email" : "setev",
+    "password" : "hello"
+}
+
+
+### login test
+POST http://localhost:5500/api/user/login
+Content-Type: application/json
+
+{
+    "email" : "setev",
+    "password" : "helo"
+}
+
+
+
+###  signup
+POST http://localhost:5500/api/users/signup
+Content-Type: application/json
+
+{
+    "email" : "diasm4@gmail.com",
+    "nickname" : "diasm3",
+    "password" : "123456"
+}
+
+
+###  signin
+POST http://localhost:5500/api/users/signin
+Content-Type: application/json
+
+{
+    "email" : "diasm4@gmail.com",
+    "password" : "123456"
+}
