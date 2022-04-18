@@ -6,14 +6,15 @@ const Users = db.users
 
 // 게시물 전체 조회	/api/posts	GET
 const fetchList = async (req, res) => {
-  const post = await Posts.findAll({
-    include : [{ 
-      model : Users,
-      as: 'user'
-    }]
+  const post = await Posts.findOne({
+    include: [
+      {
+        model: Users,
+        as: "user",
+      },
+    ],
   })
-  console.log(post)
-  res.status(200).send({ post: post })
+  res.status(200).send({ post: post})
 }
 
 // 게시물 생성	/api/post	POST
@@ -26,9 +27,7 @@ const createPost = async (req, res) => {
     content: content,
     image_url: image_url,
     user_id: 1, //인증을 해야함
-  } 
-
-  )
+  })
   res.status(200).send(post)
 }
 
@@ -37,7 +36,10 @@ const createPost = async (req, res) => {
 const readPost = async (req, res) => {
   let id = req.params.post_id
 
-  const post = await Posts.findOne({ where: { id: id } })
+  const post = await Posts.findOne({
+    include: [{ model: Users, as: "user" }],
+    where: { post_id: id },
+  })
   res.status(200).send(post)
   console.log(post)
 }
@@ -50,7 +52,7 @@ const updatePost = async (req, res) => {
 
   // const info = ({ title, content } = req.body)
 
-  const post = await Posts.update(req.body, { where: { id: id } })
+  const post = await Posts.update(req.body, { where: { post_id: id } })
   res.status(200).send(post)
 }
 
@@ -59,7 +61,7 @@ const updatePost = async (req, res) => {
 const deletePost = async (req, res) => {
   let id = req.params.post_id
 
-  await Posts.destory({ where: { id: id } })
+  await Posts.destory({ where: { post_id: id } })
   res.status(200).send("posts deleted")
 }
 
