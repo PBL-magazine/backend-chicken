@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.SQL_SERVER_IP,
     port: process.env.SQL_PORT,
-    dialect: "mysql",
+    dialect: "mariadb",
   }
 )
 
