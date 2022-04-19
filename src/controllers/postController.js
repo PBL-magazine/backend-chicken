@@ -24,7 +24,7 @@ router.post("/posts", auth, async (req, res) => {
 
 // 특정 게시물 조회
 router.get("/posts/:post_id", async (req, res) => {
-  const { post_id } = req.params.post_id
+  const  post_id  = req.params.post_id
 
   POST_SERVICE.getPost(post_id)
 
@@ -41,18 +41,16 @@ router.put("/posts/:post_id", auth, async (req, res) => {
 })
 
 // 게시물 하나 지우기
-router.delete("/posts/:post_id", auth, async (req, res) => {
+router.delete("/posts/:post_id/delete", auth, async (req, res) => {
   const { post_id } = req.params.post_id
+  console.log(post_id)
+
+  POST_SERVICE.deletePost(post_id)
 
   res.status(200).send("post deleted")
 })
 
-// like
-router.put("/posts/:post_id/like", auth) // 특정 게시물 좋아요 상태 변경
 
 
-// Register, Login
-router.post("/users/signup") // 사용자 회원가입
-router.post("/users/signin") // 사용자 로그인
 
 module.exports = router
