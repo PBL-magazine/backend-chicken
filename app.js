@@ -9,8 +9,8 @@ const cors = require("cors")
 controllers = [
 require("./src/controllers/postController"),
 require("./src/controllers/commentController"),
-// require("./src/controllers/likeController"),
-// require("./src/controllers/userController"),
+require("./src/controllers/likeController"),
+require("./src/controllers/userController"),
 ]
 
 
