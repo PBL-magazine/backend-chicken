@@ -1,6 +1,3 @@
-const db = require("../models/index")
-const bcrypt = require("bcrypt")
-const { ValidationError } = require("sequelize")
 const jwt = require("jsonwebtoken")
 const jm = require("../models/index")
 const dotenv = require("dotenv") 
