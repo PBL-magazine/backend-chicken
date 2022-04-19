@@ -9,7 +9,7 @@ dotenv.config({ path: "../../utils/config.env" })
 
 const authMiddleware = async (req, res, next) => {
   // cookie-session 라이브러리를 이용해서 발생된 토큰을 클라이언트에 주입
-  const token = req.session.info
+  const token = req.session.token
   const info = jwt.decode(token, process.env.JWT_SECRECT)
 
   const result = await Users.findOne({
