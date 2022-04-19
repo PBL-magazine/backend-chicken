@@ -2,6 +2,7 @@ const db = require("../models/index")
 
 const Comments = db.comments
 const Users = db.users
+const Posts = db.posts
 
 /*############# Service logic ###################
 1. bussiness logic 이라고 하다
@@ -11,25 +12,28 @@ Client -> Service -> Repository -> DB
 
 //Comment Service
 class Repository {
-  Create = async (user_id, post_id, data) => {
-    return await Comments.create(data)
+  Create = async (data) => {
+    const { user_id, post_id, content } = data
+    return await Comments.create({ user_id, post_id, content })
   }
 
-  ReadAll = async () => {
-    await Comments.findAll({
+  searchByPostId = async (post_id) => {
+    return await Comments.findAll({
+      where: {
+        post_id,
+      },
       include: [
         {
           model: Users,
           as: "user",
-          attributes: ["nickname"],
+          attributes: ["user_id", "email", "nickname"],
         },
       ],
-      attributes: ["comment_id", "content", "createdAt"],
     })
   }
 
   Update = async (comment_id, body) => {
-    await Comments.update(body, {
+    return await Comments.update(body, {
       where: {
         comment_id: comment_id,
       },
@@ -37,7 +41,7 @@ class Repository {
   }
 
   Delete = async (comment_id) => {
-    await Comments.update(
+    return await Comments.update(
       {
         deletedAt: new Date(),
       },
@@ -51,15 +55,16 @@ class Repository {
 const comment = new Repository()
 
 const commentService = {
-  createComment: async (user_id, post_id, data) => {
+  createComment: async (data) => {
     return comment.Create(data).then((result) => {
       console.log(result)
     })
   },
 
-  getAllComments: async () => {
-    return comment.ReadAll().then((result) => {
+  getAllComments: async (post_id) => {
+    return comment.searchByPostId(post_id).then((result) => {
       console.log(result)
+      return result
     })
   },
 

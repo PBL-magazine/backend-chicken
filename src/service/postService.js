@@ -15,7 +15,7 @@ class Repository {
   }
 
   ReadbyId = async (post_id) => {
-    await Posts.findOne({
+   return await Posts.findOne({
       include: [
         {
           model: Users,
@@ -45,7 +45,7 @@ class Repository {
   }
 
   Delete = async (post_id) => {
-    await Posts.update(
+   return await Posts.destory(
       {
         deletedAt: new Date(),
       },
