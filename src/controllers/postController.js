@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const auth = require("../auth/auth")
 const POST_SERVICE = require("../service/postService")
-const Message = require("../../utils/Msg")
+const Message = require("../../utils/msg")
 
 /*############# controller ###################
 컨트롤러는 데이터를 라우터 + 받아오는 

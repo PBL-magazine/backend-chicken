@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const Message = require("../../utils/Msg")
+const Message = require("../../utils/msg")
 const jm = require("../models/index")
 const dotenv = require("dotenv")
 
