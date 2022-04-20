@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const auth = require("../auth/auth")
-const Message = require("../../utils/Msg")
+const Message = require("../../utils/msg")
 const { ValidationError } = require("sequelize")
 const dotenv = require("dotenv")
 
