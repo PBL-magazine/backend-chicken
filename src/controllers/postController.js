@@ -12,10 +12,10 @@ router.get("/posts", async (req, res) => {
   try {
     const result = await POST_SERVICE.getAllPosts()
 
-    const data = result.map((el) => el.get({ plain: true }))
+    // const data = result.map((el) => el.get({ plain: true }))
     // console.log(data)
     // console.log(Message.success(result,"row"))
-    res.status(200).json(Message.success(result, "rows"))
+    res.status(200).send(Message.success(result, "rows"))
     // res.status(200).send(Message.success(result))
   } catch (err) {
     res.status(500).send(Message.Err500)
@@ -30,12 +30,12 @@ router.post("/posts", auth, async (req, res) => {
       res.status(401).send(Message.Err401)
     }
 
-    const { title, content, image } = req.body
-    if (!title && !content && !image) {
+    const { title, content, image_url } = req.body
+    if (!title && !content && !image_url) {
       res.status(400).send(Message.Err400)
     }
 
-    POST_SERVICE.createPost({ title, content, image, user_id })
+    POST_SERVICE.createPost({ title, content, image_url, user_id })
     res.status(200).send(Message.success())
   } catch (err) {
     res.status(500).send(Message.Err500)
@@ -48,7 +48,7 @@ router.get("/posts/:post_id", async (req, res) => {
     const post_id = req.params.post_id
     const result = await POST_SERVICE.getPost(post_id)
 
-    res.status(200).send(Message.success(result))
+    res.status(200).send(Message.success(result,"row"))
   } catch (err) {
     res.status(500).send(Message.Err500)
   }
@@ -59,9 +59,9 @@ router.put("/posts/:post_id", auth, async (req, res) => {
   try {
     const post_id = req.params.post_id
 
-    const { title, content, image } = req.body
-    if (!title && !content && !image) {
-      await POST_SERVICE.updatePost(post_id, { title, content, image })
+    const { title, content, image_url } = req.body
+    if (!title && !content && !image_url) {
+      await POST_SERVICE.updatePost(post_id, { title, content, image_url })
     }
 
     res.status(200).send(Message.success())

@@ -23,7 +23,7 @@ const authMiddleware = async (req, res, next) => {
           email: info.email,
         },
       }).then((user) => {
-        req.token = user.dataValues
+        req.token= user.dataValues
       })
       res.status(200).send(Message.success(info, "user"))
     } else {

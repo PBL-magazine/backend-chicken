@@ -48,11 +48,8 @@ const errMsg = {
 
 const success = (row, name) => {
   return {
-    status: "200 Ok",
-    data: {
       ok: true,
      [name]: row,
-    },
   }
 }
 

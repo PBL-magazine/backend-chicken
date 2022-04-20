@@ -25,7 +25,7 @@ db.posts.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
 
 // likes
 db.users.hasMany(db.likes, { foreignKey: "user_id", as: "like" })
-db.posts.hasMany(db.likes, { foreignKey: "post_id", as: "like" })
+db.posts.hasMany(db.likes, { foreignKey: "post_id", as: "likes" })
 db.likes.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
 db.likes.belongsTo(db.posts, { foreignKey: "post_id", as: "post" })
 

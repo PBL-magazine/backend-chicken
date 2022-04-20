@@ -13,8 +13,8 @@ Client -> Service -> Repository -> DB
 
 class Repository {
   Create = async (data) => {
-    const { title, content, image, user_id } = data
-    return await Posts.create({ title, content, image, user_id })
+    const { title, content, image_url, user_id } = data
+    return await Posts.create({ title, content, image_url, user_id })
   }
 
   ReadbyId = async (post_id) => {
@@ -42,7 +42,7 @@ class Repository {
         {
           raw: true,
           model : Likes,
-          as : "like",
+          as : "likes",
           attributes : ["user_id" ],
         }
       ],
