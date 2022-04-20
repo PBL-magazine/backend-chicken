@@ -1,15 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const Likes = sequelize.define(
-    "like",
+    "likes",
     {
-      dummy: {
-        type: DataTypes.INTEGER,
-      },
     },
     {
       sequelize,
       modelName: "likes",
-      tableName: "like",
+      tableName: "likes",
       charset: "utf8",
       collate: "utf8_general_ci",
       underscored: true,

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      image_url: {
+      image: {
         type: DataTypes.STRING(100),
         allowNull: true,
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       collate: "utf8_general_ci",
       underscored: true,
       timestamps: true,
-      paranoid: true,
+      paranoid: false,
     }
   )
 

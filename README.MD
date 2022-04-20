@@ -3,10 +3,37 @@
     - Express, JWT, Sequelize, mysql, joi, docker, postman, cookie-session 
 
 ## 현재 작업중 
+    - 예외처리
+        - http method에 맞는 http Status code 변환하기
+        - 에러메세지 처리하기
+    - 권한기능
+        - [ ] 글쓰기 권한 (로그인 한 사람만 작성가능)
+        - [ ] 이미 로그인 한 사람의 다시 페이지 또는 회원가입한 페이지에 접속할 경우 에러메세지
+        - [ ] 글쓰기 권한이 가지고 있는 사람은 글은 조회는 가능하나 수정, 삭제는 불가능
+        - [ ] 관리자 권한을 가지고 있는 사람은 아무거나 글 수정, 삭제 가능
+        - [ ] 로그인 하지 않은 사람
+    -  로그인 처리
+        - [ ] 닉네임은 `최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)`로 구성하기
+        - [ ] 비밀번호는 `최소 4자 이상이며, 닉네임과 같은 값이 포함된 경우 회원가입에 실패`로 만들기
+        - [ ] 비밀번호 확인은 비밀번호와 정확하게 일치하기
+    - 이미지 업로드 삭제 
+    - CORS 처리
+    
+## 작업한 내용
 
-    - [ ] cookie-seesion 설정 및 사용자 상태 
-    - [ ] cookie-session middle ware를 기존 라우터에 연결
-    - [ ] fetchList 부분 원하는 데이터만 가져오기가 안됨 (attributes, include)
+    - [x] JWT인증 방식 연습 완료
+    - [x] DB Models 작업 완료
+    - [x] 첫째주 express를 이용한 router 이용 방법 완료
+    - [x] cookie-seesion 설정 및 사용자 상태 
+    - [x] cookie-session middle ware를 기존 라우터에 연결
+    - [x] fetchList 부분 원하는 데이터만 가져오기가 안됨 (attributes, include)
+    - [x] 좋아요 기능 추가
+    - [x] 로그인 Authentication middleware 처리
+    - [x] refactoring 을 해서 좀서 알아보기 쉽게 가독성을 높혀야함
+    - [x] MVC 패턴으로 나름대로 짜봤는데 맞는지 모르겠음
+    - [x] Primary key, Forigner key 설정 방법
+    - [x] sequelize 구조에 대한 이해 부족
+
 
 ## 요구조건
 <aside>
@@ -38,26 +65,6 @@
 6. [ ] 관리자 권한
     - 권한을 추가하여 관리자 계정 로그인 시 모든 게시글, 댓글을 삭제할 수 있도록 구현하기
 
-## 작업한 내용
-
-    - [x] JWT인증 방식 연습 완료
-    - [x] DB Models 작업 완료
-    - [x] 첫째주 express를 이용한 router 이용 방법 완료
-
-## 작업 할 내용
-
-    - [x] Sequelize 테이블 관계에 대해서 더 알아야함
-        - 자꾸 하다 보니 이해가 되기 시작함
-    - [ ] 로그인 Authentication middleware 처리
-    - [ ] refactoring 을 해서 좀서 알아보기 쉽게 가독성을 높혀야함
-    - [ ] Joi를 이용한 Validate 작성 
-    - [ ] 좋아요 기능 추가
-    - [ ]  
-
-## 모르는 부분
-
-    - [x] Primary key, Forigner key 설정 방법
-    - [x] sequelize 구조에 대한 이해 부족
 
 
 ## 새롭게 알게된 부분
