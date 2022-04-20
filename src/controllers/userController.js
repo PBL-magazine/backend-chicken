@@ -1,5 +1,10 @@
 const router = require("express").Router()
+const auth = require("../auth/auth")
+const Message = require("../../utils/msg")
 const { ValidationError } = require("sequelize")
+const dotenv = require("dotenv")
+
+dotenv.config({ path: "../../utils/config.env" })
 
 const USER_SERVICE = require("../service/userService")
 
@@ -9,7 +14,6 @@ router.post("/users/signup", async (req, res) => {
 
     await USER_SERVICE.userRegister({ email, nickname, password })
     res.status(201).send("done")
-
   } catch (e) {
     if (e instanceof ValidationError) {
       res.status(500).send()
@@ -26,12 +30,29 @@ router.post("/users/signin", async (req, res) => {
   }
   try {
     const token = await USER_SERVICE.userLogin(email, password)
+    req.header.authorization = token
     req.session.token = token
 
-    res.status(200).send("done")
-
+    res.status(200).json({
+      status: "200 Ok",
+      cookies: { token: token },
+      data: { ok: true },
+    })
   } catch {
-    res.status(500).send()
+    res.status(500).send(Message.errMsg.Err500)
+  }
+})
+
+router.get("/users/auth", auth, async (req, res) => {
+  // console.log(res.locals.info)
+  try {
+    const { user_id, nickname, email, role } = req.token
+
+    return res
+      .status(200)
+      .send(Message.success({ user_id, nickname, email, role }, "user"))
+  } catch (err) {
+    return res.status(403).send(Message.Err403)
   }
 })
 

@@ -25,7 +25,7 @@ db.posts.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
 
 // likes
 db.users.hasMany(db.likes, { foreignKey: "user_id", as: "like" })
-db.posts.hasMany(db.likes, { foreignKey: "post_id", as: "like" })
+db.posts.hasMany(db.likes, { foreignKey: "post_id", as: "likes" })
 db.likes.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
 db.likes.belongsTo(db.posts, { foreignKey: "post_id", as: "post" })
 
@@ -35,13 +35,13 @@ db.posts.hasMany(db.comments, { foreignKey: "post_id", as: "comment" })
 db.comments.belongsTo(db.users, { foreignKey: "user_id", as: "user" })
 db.comments.belongsTo(db.posts, { foreignKey: "post_id", as: "post" })
 
-sequelize
-  .sync({ force: false }) // true일때 컬럼이 모두 초기화됨
-  .then((result) => {
-      console.log(`---------------init sequelize--------------` )
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+// sequelize
+//   .sync({ force: false }) // true일때 컬럼이 모두 초기화됨
+//   .then((result) => {
+//       console.log(`---------------init sequelize--------------` )
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
 
 module.exports =  db 

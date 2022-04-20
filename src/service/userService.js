@@ -28,8 +28,6 @@ class Repository {
         email: email,
       },
     })
-
-    console.log(info)
   }
 }
 
@@ -51,11 +49,11 @@ const userService = {
     return await user
       .searchByEmail(email)
       .then((result) => {
-        const { user_id, email, password } = result
+        const { user_id, email, password, nickname, role } = result
 
         if (bcrypt.compare(inputPassword, password)) {
           const token = jwt.sign(
-            { user_id: user_id, email: email },
+            { user_id: user_id, email: email, role : role, nickname: nickname },
             process.env.JWT_SECRET
           )
 

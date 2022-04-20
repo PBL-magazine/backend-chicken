@@ -1,10 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Likes = sequelize.define(
-    "like",
+    "likes",
     {
-      dummy: {
-        type: DataTypes.INTEGER,
-      },
     },
     {
       sequelize,
