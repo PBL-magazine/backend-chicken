@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "likes",
-      tableName: "like",
+      tableName: "likes",
       charset: "utf8",
       collate: "utf8_general_ci",
       underscored: true,

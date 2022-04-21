@@ -1,4 +1,5 @@
 const { Op } = require("sequelize")
+const { post } = require("../controllers/userController")
 const db = require("../models/index")
 
 const Likes = db.likes
@@ -43,6 +44,7 @@ const likeService = {
       where: { post_id: post_id },
     })
   },
+
 
   test: async (post_id, user_id) => {
     const result = await rep.checkLike(post_id, user_id)

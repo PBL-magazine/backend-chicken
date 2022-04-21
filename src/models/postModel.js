@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      title: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
       content: {
         type: DataTypes.TEXT,
         allowNull: false,
