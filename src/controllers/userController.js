@@ -30,13 +30,11 @@ router.post("/users/signin", async (req, res) => {
   }
   try {
     const token = await USER_SERVICE.userLogin(email, password)
-    req.header.authorization = token
+    // req.header.authorization = token
     req.session.token = token
-
-    res.status(200).json({
-      status: "200 Ok",
-      cookies: { token: token },
-      data: { ok: true },
+    
+    res.status(200).send({
+      ok: true,
     })
   } catch {
     res.status(500).send(Message.errMsg.Err500)
@@ -44,14 +42,15 @@ router.post("/users/signin", async (req, res) => {
 })
 
 router.get("/users/auth", auth, async (req, res) => {
-  // console.log(res.locals.info)
+  console.log(res.locals.info)
   try {
-    const { user_id, nickname, email, role } = req.token
+    const { user_id, nickname, email, role } = res.locals.info
 
     return res
       .status(200)
       .send(Message.success({ user_id, nickname, email, role }, "user"))
   } catch (err) {
+    console.log(err)
     return res.status(403).send(Message.Err403)
   }
 })

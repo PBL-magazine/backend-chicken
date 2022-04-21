@@ -19,6 +19,9 @@ class Repository {
 
   searchByPostId = async (post_id) => {
     return await Comments.findAll({
+      raw: true,
+      nest: true,
+      order : [['createdAt', 'DESC']],
       where: {
         post_id,
       },
@@ -56,28 +59,19 @@ const comment = new Repository()
 
 const commentService = {
   createComment: async (data) => {
-    return comment.Create(data).then((result) => {
-      console.log(result)
-    })
+    return comment.Create(data)
   },
 
   getAllComments: async (post_id) => {
-    return comment.searchByPostId(post_id).then((result) => {
-      console.log(result)
-      return result
-    })
+    return comment.searchByPostId(post_id)
   },
 
   updateComment: async (comment_id, body) => {
-    return comment.Update(comment_id, body).then((result) => {
-      console.log(result)
-    })
+    return comment.Update(comment_id, body).then((result) => {})
   },
 
   deleteComment: async (comment_id) => {
-    return comment.Delete(comment_id).then((result) => {
-      console.log(result)
-    })
+    return comment.Delete(comment_id).then((result) => {})
   },
 }
 

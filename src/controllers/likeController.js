@@ -15,7 +15,7 @@ router.put("/posts/:post_id/like", auth, async (req, res) => {
 
     const  result = await LIKE_SERVICE.test(post_id, user_id)
 
-    res.send({result : result, count : count })
+    res.send({"ok":true})
 
 }) // 특정 게시물 좋아요 상태 변경
 

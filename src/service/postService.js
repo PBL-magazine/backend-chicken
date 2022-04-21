@@ -13,44 +13,52 @@ Client -> Service -> Repository -> DB
 
 class Repository {
   Create = async (data) => {
-    const { title, content, image_url, user_id } = data
-    return await Posts.create({ title, content, image_url, user_id })
+    const { content, image_url, user_id } = data
+    return await Posts.create({ content, image_url, user_id })
   }
 
   ReadbyId = async (post_id) => {
     return await Posts.findOne({
+      // raw: true,
+      // nest: true,
       include: [
         {
           model: Users,
           as: "user",
           attributes: ["user_id", "email", "nickname"],
         },
+        {
+          model: Likes,
+          as: "likes",
+          attributes: ["user_id"],
+        },
       ],
-      where: { post_id: post_id },
+      where: { post_id },
     })
   }
 
   ReadAll = async () => {
     return await Posts.findAll({
+      // raw: true,
+      // nest: true,
+      order : [['createdAt', 'DESC']],
       include: [
         {
-          raw: true,
           model: Users,
           as: "user",
           attributes: ["user_id", "email", "nickname"],
         },
         {
-          raw: true,
-          model : Likes,
-          as : "likes",
-          attributes : ["user_id" ],
-        }
+          model: Likes,
+          as: "likes",
+          attributes: ["user_id"],
+        },
       ],
     })
   }
 
-  Update = async (post_id, body) => {
-    return await Posts.update(body, { where: { post_id: post_id } })
+  Update = async (content, post_id) => {
+    return await Posts.update(content, { where: { post_id: post_id } })
   }
 
   Delete = async (post_id) => {
@@ -63,32 +71,16 @@ class Repository {
 const repo = new Repository()
 
 const postService = {
-  createPost: async (data) => {
-    return repo.Create(data).then((result) => {
-      return result
-    })
-  },
+  createPost: async (data) => repo.Create(data),
 
-  getAllPosts: async () => {
-    return await repo.ReadAll()
-    // return await LIKE_SERVICE.fetchLikesCount()
+  getAllPosts: async () => await repo.ReadAll(),
 
-  },
-  // .map((el) =>el.get({plain : true})),
+  getPost: async (post_id) => await repo.ReadbyId(post_id),
 
-  getPost: async (post_id) => {
-    return repo.ReadbyId(post_id).then((result) => {
-      return result
-    })
-  },
+  updatePost: async (content, post_id) =>
+    await repo.Update(content, post_id),
 
-  updatePost: async (post_id, body) => {
-    return repo.updatePost(post_id, body).then((result) => {
-      return result
-    })
-  },
-
-  deletePost: async (post_id) => repo.Delete(post_id),
+  deletePost: async (post_id) => await repo.Delete(post_id),
 }
 
 module.exports = postService
