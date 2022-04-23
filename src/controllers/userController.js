@@ -12,8 +12,10 @@ router.post("/users/signup", async (req, res) => {
   try {
     const { email, nickname, password } = req.body
 
-    await USER_SERVICE.userRegister({ email, nickname, password })
-    res.status(201).send("done")
+    const result = await USER_SERVICE.userRegister({ email, nickname, password })
+    console.log(result)
+
+    res.status(201).send(Message.success())
   } catch (e) {
     if (e instanceof ValidationError) {
       res.status(500).send()
@@ -24,14 +26,14 @@ router.post("/users/signup", async (req, res) => {
 
 router.post("/users/signin", async (req, res) => {
   const { email, password } = req.body
-
   if (email == null && password == null) {
     return res.status(400).send("please enter email and password")
   }
   try {
     const token = await USER_SERVICE.userLogin(email, password)
-    // req.header.authorization = token
-    req.session.token = token
+    
+    // req.session.token = token
+    res.cookie("token", token)
     
     res.status(200).send({
       ok: true,
@@ -41,8 +43,15 @@ router.post("/users/signin", async (req, res) => {
   }
 })
 
+router.delete("/users/logout", async (req, res) => {
+  req.session.destroy()
+    res.status(200).send({
+      ok: true,
+    })
+})
+
+
 router.get("/users/auth", auth, async (req, res) => {
-  console.log(res.locals.info)
   try {
     const { user_id, nickname, email, role } = res.locals.info
 
