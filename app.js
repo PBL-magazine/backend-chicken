@@ -5,6 +5,7 @@ const morgan = require("morgan")
 const cors = require("cors")
 const db = require("./src/models/index")
 const path = require("path")
+const { swaggerUi, specs } = require('./test/swagger')
 
 // Controllers
 controllers = [
@@ -14,6 +15,7 @@ controllers = [
   require("./src/controllers/userController"),
 ]
 
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
 app.use(
   cookieSession({
     name: "token",
