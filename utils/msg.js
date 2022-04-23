@@ -1,45 +1,33 @@
 const errMsg = {
+  // status: "401 Unauthorized",
   Err401: {
-    // status: "401 Unauthorized",
-    // data: {
-      ok: false,
-      message: "로그인 필요 또는 수정 권한 없음",
-    // },
+    ok: false,
+    message: "로그인 필요 또는 수정 권한 없음",
   },
+  // status: "401 Unauthorized",
   Err401: {
-    // status: "401 Unauthorized",
-    // data: {
-      ok: false,
-      message: "로그인 필요 또는 삭제 권한 없음",
-    // },
+    ok: false,
+    message: "로그인 필요 또는 삭제 권한 없음",
   },
+  // status: "404 Not Found",
   Err404: {
-    // status: "404 Not Found",
-    // data: {
-      ok: false,
-      message: "정보를 찾을 수 없음",
-    // },
+    ok: false,
+    message: "정보를 찾을 수 없음",
   },
+  // status: "400 Bad Request",
   Err400: {
-    // status: "400 Bad Request",
-    // data: {
-      ok: false,
-      message: "입력 형식 확인 요망",
-    // },
+    ok: false,
+    message: "입력 형식 확인 요망",
   },
+  // status: "409 Conflict",
   Err409: {
-    // status: "409 Conflict",
-    // data: {
-      ok: false,
-      message: "사용자가 이미 존재함",
-    // },
+    ok: false,
+    message: "사용자가 이미 존재함",
   },
+  // status: "419 Authentication Timeout",
   Err419: {
-    // status: "419 Authentication Timeout",
-    // data: {
-      ok: false,
-      message: "토큰이 만료되었습니다",
-    // },
+    ok: false,
+    message: "토큰이 만료되었습니다",
   },
   Err500: {
     status: "500 Internal Server Error",
@@ -48,8 +36,8 @@ const errMsg = {
 
 const success = (row, name) => {
   return {
-      ok: true,
-     [name]: row,
+    ok: true,
+    [name]: row,
   }
 }
 
