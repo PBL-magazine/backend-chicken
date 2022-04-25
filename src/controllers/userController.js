@@ -1,19 +1,24 @@
 const router = require("express").Router()
 const auth = require("../auth/auth")
 const Message = require("../../utils/msg")
+const {
+  ValidationMiddleWare,
+  ValidationRule,
+} = require("../../utils/validation")
 const { ValidationError } = require("sequelize")
 const dotenv = require("dotenv")
-
 dotenv.config({ path: "../../utils/config.env" })
-
 const USER_SERVICE = require("../service/userService")
 
-router.post("/users/signup", async (req, res) => {
+router.post("/users/signup", ValidationMiddleWare, async (req, res) => {
   try {
     const { email, nickname, password } = req.body
 
-    const result = await USER_SERVICE.userRegister({ email, nickname, password })
-    console.log(result)
+    const result = await USER_SERVICE.userRegister({
+      email,
+      nickname,
+      password,
+    })
 
     res.status(201).send(Message.success())
   } catch (e) {
@@ -31,10 +36,10 @@ router.post("/users/signin", async (req, res) => {
   }
   try {
     const token = await USER_SERVICE.userLogin(email, password)
-    
+
     // req.session.token = token
     res.cookie("token", token)
-    
+
     res.status(200).send({
       ok: true,
     })
@@ -45,11 +50,10 @@ router.post("/users/signin", async (req, res) => {
 
 router.delete("/users/logout", async (req, res) => {
   req.session.destroy()
-    res.status(200).send({
-      ok: true,
-    })
+  res.status(200).send({
+    ok: true,
+  })
 })
-
 
 router.get("/users/auth", auth, async (req, res) => {
   try {

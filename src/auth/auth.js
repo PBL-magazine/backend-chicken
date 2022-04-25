@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken")
 const Message = require("../../utils/msg")
 const dotenv = require("dotenv")
 const findEmail = require("../repository/userRepo")
-
 dotenv.config({ path: "../../utils/config.env" })
+
 const getAppCookies = (req) => {
   const rawCookies = req.headers.cookie.split("; ")
 
@@ -18,12 +18,9 @@ const getAppCookies = (req) => {
 const authMiddleware = async (req, res, next) => {
   try {
     // const bearerHeader = req.session.token
-    // console.log(req.headers, + "cookie있어?")
-
-    // console.log(token)
 
     if (typeof req.headers.cookie !== "undefined") {
-      const { token }= getAppCookies(req)
+      const { token } = getAppCookies(req)
       const { email } = jwt.decode(token, process.env.JWT_SECRECT)
 
       const result = await findEmail.searchByEmail(email)
