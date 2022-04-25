@@ -2,3 +2,5 @@ node_modules
 utils/config.env
 .DSstore
 practice
+uploads
+frontend-choewy

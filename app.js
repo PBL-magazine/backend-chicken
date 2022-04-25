@@ -5,6 +5,8 @@ const morgan = require("morgan")
 const cors = require("cors")
 const db = require("./src/models/index")
 const path = require("path")
+const { swaggerUi, specs } = require("./test/swagger")
+const { createProxyMiddleware } = require("http-proxy-middleware")
 
 // Controllers
 controllers = [
@@ -14,6 +16,7 @@ controllers = [
   require("./src/controllers/userController"),
 ]
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
 app.use(
   cookieSession({
     name: "token",
@@ -26,7 +29,7 @@ app.use(express.static("src"))
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors({ origin: true, credentials: true }))
 app.use(morgan("dev"))
 app.use("/api", controllers)
 
