@@ -3,7 +3,7 @@ const db = require('../models/index');
 
 const Users = db.users
 const Posts = db.posts
-const Comments = db.posts
+const Comments = db.comments
 const Likes = db.likes
 
 /*############# Service logic ###################
@@ -16,6 +16,7 @@ module.exports = new class commentRepo {
   constructor() { }
   Create = async (data) => {
     const { user_id, post_id, content } = data;
+
     return await Comments.create({ user_id, post_id, content });
   };
 

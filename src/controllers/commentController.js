@@ -8,7 +8,7 @@ router.get("/posts/:post_id/comments", async (req, res) => {
   try {
     const post_id = parseInt(req.params.post_id)
 
-    await COMMENT_SERVICE.getAllComments(post_id)
+    const result = await COMMENT_SERVICE.getAllComments(post_id)
 
     res.status(200).send(Message.success(result, "rows"))
   } catch (err) {
