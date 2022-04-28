@@ -9,10 +9,6 @@ const Message = require("../../utils/msg")
 컨트롤러는 데이터를 라우터 + 받아오는 
 #############################################*/
 
-
-
-
-
 // 전체 게시물 조회
 router.get("/posts", async (req, res) => {
   try {
@@ -20,11 +16,9 @@ router.get("/posts", async (req, res) => {
 
     return res.status(200).send(Message.success(result, "rows"))
   } catch (err) {
-
     return res.status(500).send(Message.Err500)
   }
 })
-
 
 // 게시물 생성
 router.post("/posts", auth, upload.single("image"), async (req, res) => {
@@ -32,7 +26,6 @@ router.post("/posts", auth, upload.single("image"), async (req, res) => {
     const { user_id } = res.locals.info
     const { content } = req.body
     const image_url = "/uploads/" + req.file.filename
-
 
     if (!user_id) {
       res.status(401).send(Message.Err401)

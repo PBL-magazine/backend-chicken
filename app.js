@@ -4,9 +4,8 @@ const app = express()
 const morgan = require("morgan")
 const cors = require("cors")
 const db = require("./src/models/index")
-const path = require("path")
+// const path = require("path")
 const { swaggerUi, specs } = require("./test/swagger")
-const { createProxyMiddleware } = require("http-proxy-middleware")
 
 // Controllers
 controllers = [
